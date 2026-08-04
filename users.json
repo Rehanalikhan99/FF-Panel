@@ -1,36 +1,54 @@
 {
   "EREN": {
-    "rehan123": {
-      "password": "mypassword1",
-      "hwid": "",
-      "expiryDate": "2027-12-31"
-    },
     "rehan_free": {
       "password": "freepassword",
       "hwid": "free",
-      "expiryDate": "No Expiry"
+      "expiryDate": "No Expiry",
+      "hwid_bind_date": "None",
+      "hwid_reset_date": "None",
+      "last_reset_date": "None"
     },
-    "paid_user2": {
-      "password": "password123",
+    "trial_user1": {
+      "password": "trialpass123",
       "hwid": "",
-      "expiryDate": "2025-12-31"
+      "expiryDate": "2026-08-07",
+      "hwid_bind_date": "None",
+      "hwid_reset_date": "None",
+      "last_reset_date": "None"
     },
     "Aladin": {
-      "password": "5",
-      "hwid": "66fb987f7c8de6461df1e269083e41e6e73c3aef89aa174181195a29252d4c97",
-      "expiryDate": "2026-08-05"
-    },
-    "free_user2": {
-      "password": "freepass123",
-      "hwid": "free",
-      "expiryDate": "No Expiry"
+      "password": "1",
+      "hwid": "",
+      "expiryDate": "2027-12-31",
+      "hwid_bind_date": "None",
+      "hwid_reset_date": "None",
+      "last_reset_date": "None"
     }
   },
   "INSANE": {
-    "rehan": {
-      "password": "1",
-      "hwid": "66fb987f7c8de6461df1e269083e41e6e73c3aef89aa174181195a29252d4c97",
-      "expiryDate": "2027-10-15"
+    "vip_free_user": {
+      "password": "vipfreepass",
+      "hwid": "free",
+      "expiryDate": "No Expiry",
+      "hwid_bind_date": "None",
+      "hwid_reset_date": "None",
+      "last_reset_date": "None"
+    },
+    "Aladin": {
+      "password": "A",
+      "hwid": "",
+      "expiryDate": "2027-08-10",
+      "hwid_bind_date": "None",
+      "hwid_reset_date": "None",
+      "last_reset_date": "None"
+    },
+    "usman_pro": {
+      "password": "usmanpassword",
+      "hwid": "f8e7d6c5b4a3...",
+      "expiryDate": "2027-10-15",
+      "hwid_bind_date": "2026-08-01",
+      "hwid_reset_date": "2026-08-31",
+      "last_reset_date": "None"
     }
   }
 }
