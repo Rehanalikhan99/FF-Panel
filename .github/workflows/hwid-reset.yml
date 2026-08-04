@@ -1,9 +1,9 @@
 name: HWID Auto Reset
 
 on:
+
   schedule:
-    # Roz 1 dafa chalega (00:00 UTC)
-    - cron: "0 0 * * *"
+    - cron: "0 * * * *"
 
   workflow_dispatch:
 
@@ -11,28 +11,32 @@ permissions:
   contents: write
 
 jobs:
+
   reset:
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Run Reset Script
+      - name: Run Script
         run: python scripts/hwid_reset.py
 
       - name: Commit Changes
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
 
-          git add database/users.json
+          git add users.json
 
-          git diff --cached --quiet || git commit -m "Auto HWID Reset"
-
-          git push
+          if git diff --cached --quiet; then
+            echo "No Changes"
+          else
+            git commit -m "Auto HWID Reset"
+            git push
+          fi
