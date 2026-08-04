@@ -1,8 +1,0 @@
-{
-  "name": "hwid-system",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "dayjs": "^1.11.13"
-  }
-}

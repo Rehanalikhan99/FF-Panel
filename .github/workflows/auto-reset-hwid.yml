@@ -1,0 +1,130 @@
+name: Auto Reset HWID (30 Days)
+
+on:
+  schedule:
+    # Runs every day at 00:00 UTC
+    - cron: '0 0 * * *'
+  # Manual trigger from GitHub UI
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reset-hwid:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Reset HWIDs (30 days rule)
+        run: |
+          const fs = require('fs');
+          const path = require('path');
+
+          // Configuration
+          const FILE_PATH = 'users.json';
+          const RESET_DAYS = 30;
+          
+          // Read the JSON file
+          const data = fs.readFileSync(FILE_PATH, 'utf8');
+          const users = JSON.parse(data);
+          
+          const today = new Date();
+          let changesMade = false;
+          
+          console.log(`📅 Checking HWIDs on: ${today.toISOString().split('T')[0]}`);
+          console.log(`⏰ Reset threshold: ${RESET_DAYS} days\n`);
+          
+          // Loop through categories (EREN, INSANE, etc.)
+          for (const category in users) {
+            console.log(`📁 Category: ${category}`);
+            
+            // Loop through users in each category
+            for (const username in users[category]) {
+              const user = users[category][username];
+              
+              // Skip free users
+              if (user.hwid === 'free') {
+                console.log(`  🆓 ${username} - Free user (skipped)`);
+                continue;
+              }
+              
+              // Skip if no HWID set
+              if (!user.hwid || user.hwid === '') {
+                console.log(`  ⚠️ ${username} - No HWID set (skipped)`);
+                continue;
+              }
+              
+              // Get the date when HWID was set
+              let setDateStr = user.hwidSetDate || '';
+              
+              // If no set date exists, use current date
+              if (!setDateStr) {
+                user.hwidSetDate = today.toISOString().split('T')[0];
+                user.hwidResetDate = today.toISOString().split('T')[0];
+                user.lastResetDate = today.toISOString().split('T')[0];
+                changesMade = true;
+                console.log(`  📝 ${username} - Added missing dates`);
+                continue;
+              }
+              
+              // Parse the set date
+              const setDate = new Date(setDateStr);
+              const daysDiff = Math.floor((today - setDate) / (1000 * 60 * 60 * 24));
+              
+              console.log(`  👤 ${username} - HWID Set: ${setDateStr} (${daysDiff} days ago)`);
+              
+              // Check if 30+ days have passed
+              if (daysDiff >= RESET_DAYS) {
+                // Reset the HWID
+                user.hwid = '';
+                user.hwidResetDate = today.toISOString().split('T')[0];
+                user.lastResetDate = today.toISOString().split('T')[0];
+                user.hwidSetDate = today.toISOString().split('T')[0]; // Reset the set date too
+                
+                changesMade = true;
+                console.log(`  🔄 ${username} - HWID RESET! (${daysDiff} days passed)`);
+              } else {
+                const daysLeft = RESET_DAYS - daysDiff;
+                console.log(`  ✅ ${username} - ${daysLeft} days until reset`);
+              }
+            }
+            console.log('');
+          }
+          
+          // Save changes if any were made
+          if (changesMade) {
+            console.log('💾 Saving changes to users.json...');
+            fs.writeFileSync(FILE_PATH, JSON.stringify(users, null, 2));
+            console.log('✅ File updated successfully!');
+          } else {
+            console.log('✅ No changes needed.');
+          }
+          
+          // Set output for commit step
+          const fs = require('fs');
+          fs.writeFileSync(process.env.GITHUB_OUTPUT || 'output.txt', `changes=${changesMade}`);
+
+        shell: node {0}
+
+      - name: Commit and push changes
+        if: always()
+        run: |
+          # Check if there are changes to commit
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "📝 Changes detected, committing..."
+            git config user.name "GitHub Actions Bot"
+            git config user.email "actions@github.com"
+            git add users.json
+            git commit -m "🔄 Auto-reset HWID (30 days rule) - $(date +'%Y-%m-%d')"
+            git push
+            echo "✅ Changes pushed successfully!"
+          else
+            echo "✅ No changes to commit."
+          fi
