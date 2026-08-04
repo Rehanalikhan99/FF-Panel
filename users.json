@@ -18,10 +18,10 @@
     },
     "Aladin": {
       "password": "1",
-      "hwid": "",
+      "hwid": "54737374765",
       "expiryDate": "2027-12-31",
-      "hwidsetdate": "",
-      "hwidresetdate": "",
+      "hwidsetdate": "2027-11-3",
+      "hwidresetdate": "2027-12-3",
       "lastresetdate": ""
     }
   },
