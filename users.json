@@ -1,54 +1,97 @@
 {
-  "EREN": {
-    "rehan_free": {
-      "password": "freepassword",
-      "hwid": "free",
-      "expiryDate": "No Expiry",
-      "hwid_bind_date": "None",
-      "hwid_reset_date": "None",
-      "last_reset_date": "None"
+    "EREN": {
+
+        "eren_reset_today": {
+            "password": "123456",
+            "hwid": "EREN-HWID-111",
+            "expiryDate": "2027-12-31",
+            "isFreeUser": false,
+            "hwid_bind_date": "2026-07-05",
+            "hwid_reset_date": "2026-08-04",
+            "last_reset_date": ""
+        },
+
+        "eren_new_bind": {
+            "password": "123456",
+            "hwid": "EREN-HWID-222",
+            "expiryDate": "2027-12-31",
+            "isFreeUser": false,
+            "hwid_bind_date": "",
+            "hwid_reset_date": "",
+            "last_reset_date": ""
+        },
+
+        "eren_expired": {
+            "password": "123456",
+            "hwid": "EREN-HWID-333",
+            "expiryDate": "2026-07-20",
+            "isFreeUser": false,
+            "hwid_bind_date": "2026-06-15",
+            "hwid_reset_date": "2026-07-15",
+            "last_reset_date": ""
+        },
+
+        "eren_free": {
+            "password": "123456",
+            "hwid": "EREN-HWID-444",
+            "expiryDate": "",
+            "isFreeUser": true,
+            "hwid_bind_date": "2026-07-01",
+            "hwid_reset_date": "2026-08-01",
+            "last_reset_date": ""
+        }
     },
-    "trial_user1": {
-      "password": "trialpass123",
-      "hwid": "",
-      "expiryDate": "2026-08-07",
-      "hwid_bind_date": "None",
-      "hwid_reset_date": "None",
-      "last_reset_date": "None"
-    },
-    "Aladin": {
-      "password": "1",
-      "hwid": "54737374765",
-      "expiryDate": "2027-12-31",
-      "hwidsetdate": "2025-11-3",
-      "hwidresetdate": "2026-08-03",
-      "lastresetdate": ""
+
+    "INSANE": {
+
+        "insane_reset_today": {
+            "password": "654321",
+            "hwid": "INSANE-HWID-111",
+            "expiryDate": "2027-12-31",
+            "isFreeUser": false,
+            "hwid_bind_date": "2026-07-05",
+            "hwid_reset_date": "2026-08-04",
+            "last_reset_date": ""
+        },
+
+        "insane_new_bind": {
+            "password": "654321",
+            "hwid": "INSANE-HWID-222",
+            "expiryDate": "2027-12-31",
+            "isFreeUser": false,
+            "hwid_bind_date": "",
+            "hwid_reset_date": "",
+            "last_reset_date": ""
+        },
+
+        "insane_active": {
+            "password": "654321",
+            "hwid": "INSANE-HWID-333",
+            "expiryDate": "2027-12-31",
+            "isFreeUser": false,
+            "hwid_bind_date": "2026-08-01",
+            "hwid_reset_date": "2026-08-31",
+            "last_reset_date": ""
+        },
+
+        "insane_expired": {
+            "password": "654321",
+            "hwid": "INSANE-HWID-444",
+            "expiryDate": "2026-07-15",
+            "isFreeUser": false,
+            "hwid_bind_date": "2026-06-01",
+            "hwid_reset_date": "2026-07-01",
+            "last_reset_date": ""
+        },
+
+        "insane_free": {
+            "password": "654321",
+            "hwid": "INSANE-HWID-555",
+            "expiryDate": "",
+            "isFreeUser": true,
+            "hwid_bind_date": "2026-07-01",
+            "hwid_reset_date": "2026-08-01",
+            "last_reset_date": ""
+        }
     }
-  },
-  "INSANE": {
-    "vip_free_user": {
-      "password": "vipfreepass",
-      "hwid": "free",
-      "expiryDate": "No Expiry",
-      "hwid_bind_date": "None",
-      "hwid_reset_date": "None",
-      "last_reset_date": "None"
-    },
-    "Aladin": {
-      "password": "A",
-      "hwid": "",
-      "expiryDate": "2027-08-10",
-      "hwid_bind_date": "None",
-      "hwid_reset_date": "None",
-      "last_reset_date": "None"
-    },
-    "usman_pro": {
-      "password": "usmanpassword",
-      "hwid": "f8e7d6c5b4a3...",
-      "expiryDate": "2027-10-15",
-      "hwid_bind_date": "2026-08-01",
-      "hwid_reset_date": "2026-08-31",
-      "last_reset_date": "None"
-    }
-  }
 }
