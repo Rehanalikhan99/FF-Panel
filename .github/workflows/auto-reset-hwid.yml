@@ -2,9 +2,7 @@ name: Auto Reset HWID (30 Days)
 
 on:
   schedule:
-    # Runs every day at 00:00 UTC
     - cron: '0 0 * * *'
-  # Manual trigger from GitHub UI
   workflow_dispatch:
 
 permissions:
@@ -17,114 +15,88 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Reset HWIDs (30 days rule)
+      - name: Reset HWIDs
         run: |
-          const fs = require('fs');
-          const path = require('path');
+          import json
+          from datetime import datetime
 
-          // Configuration
-          const FILE_PATH = 'users.json';
-          const RESET_DAYS = 30;
-          
-          // Read the JSON file
-          const data = fs.readFileSync(FILE_PATH, 'utf8');
-          const users = JSON.parse(data);
-          
-          const today = new Date();
-          let changesMade = false;
-          
-          console.log(`📅 Checking HWIDs on: ${today.toISOString().split('T')[0]}`);
-          console.log(`⏰ Reset threshold: ${RESET_DAYS} days\n`);
-          
-          // Loop through categories (EREN, INSANE, etc.)
-          for (const category in users) {
-            console.log(`📁 Category: ${category}`);
-            
-            // Loop through users in each category
-            for (const username in users[category]) {
-              const user = users[category][username];
-              
-              // Skip free users
-              if (user.hwid === 'free') {
-                console.log(`  🆓 ${username} - Free user (skipped)`);
-                continue;
-              }
-              
-              // Skip if no HWID set
-              if (!user.hwid || user.hwid === '') {
-                console.log(`  ⚠️ ${username} - No HWID set (skipped)`);
-                continue;
-              }
-              
-              // Get the date when HWID was set
-              let setDateStr = user.hwidSetDate || '';
-              
-              // If no set date exists, use current date
-              if (!setDateStr) {
-                user.hwidSetDate = today.toISOString().split('T')[0];
-                user.hwidResetDate = today.toISOString().split('T')[0];
-                user.lastResetDate = today.toISOString().split('T')[0];
-                changesMade = true;
-                console.log(`  📝 ${username} - Added missing dates`);
-                continue;
-              }
-              
-              // Parse the set date
-              const setDate = new Date(setDateStr);
-              const daysDiff = Math.floor((today - setDate) / (1000 * 60 * 60 * 24));
-              
-              console.log(`  👤 ${username} - HWID Set: ${setDateStr} (${daysDiff} days ago)`);
-              
-              // Check if 30+ days have passed
-              if (daysDiff >= RESET_DAYS) {
-                // Reset the HWID
-                user.hwid = '';
-                user.hwidResetDate = today.toISOString().split('T')[0];
-                user.lastResetDate = today.toISOString().split('T')[0];
-                user.hwidSetDate = today.toISOString().split('T')[0]; // Reset the set date too
-                
-                changesMade = true;
-                console.log(`  🔄 ${username} - HWID RESET! (${daysDiff} days passed)`);
-              } else {
-                const daysLeft = RESET_DAYS - daysDiff;
-                console.log(`  ✅ ${username} - ${daysLeft} days until reset`);
-              }
-            }
-            console.log('');
-          }
-          
-          // Save changes if any were made
-          if (changesMade) {
-            console.log('💾 Saving changes to users.json...');
-            fs.writeFileSync(FILE_PATH, JSON.stringify(users, null, 2));
-            console.log('✅ File updated successfully!');
-          } else {
-            console.log('✅ No changes needed.');
-          }
-          
-          // Set output for commit step
-          const fs = require('fs');
-          fs.writeFileSync(process.env.GITHUB_OUTPUT || 'output.txt', `changes=${changesMade}`);
+          FILE_PATH = 'users.json'
+          RESET_DAYS = 30
 
-        shell: node {0}
+          with open(FILE_PATH, 'r') as f:
+              users = json.load(f)
 
-      - name: Commit and push changes
-        if: always()
+          today = datetime.utcnow()
+          today_str = today.strftime('%Y-%m-%d')
+          changes_made = False
+
+          print(f"📅 Checking on: {today_str}")
+
+          for category in users:
+              print(f"📁 {category}")
+              for username, user_data in users[category].items():
+                  hwid = user_data.get('hwid', '')
+                  
+                  if hwid == 'free':
+                      print(f"  🆓 {username} - Free (skipped)")
+                      continue
+                  
+                  if not hwid:
+                      print(f"  ⚠️ {username} - No HWID (skipped)")
+                      continue
+                  
+                  # Get set date (try both field names)
+                  set_date_str = user_data.get('hwidsetdate', '') or user_data.get('hwidSetDate', '')
+                  
+                  if not set_date_str:
+                      print(f"  📝 {username} - Setting date to {today_str}")
+                      user_data['hwidsetdate'] = today_str
+                      user_data['hwidresetdate'] = today_str
+                      user_data['lastresetdate'] = today_str
+                      changes_made = True
+                      continue
+                  
+                  try:
+                      set_date = datetime.strptime(set_date_str, '%Y-%m-%d')
+                  except:
+                      print(f"  ⚠️ {username} - Invalid date, setting to {today_str}")
+                      user_data['hwidsetdate'] = today_str
+                      user_data['hwidresetdate'] = today_str
+                      user_data['lastresetdate'] = today_str
+                      changes_made = True
+                      continue
+                  
+                  days_diff = (today - set_date).days
+                  print(f"  👤 {username} - {days_diff} days old")
+                  
+                  if days_diff >= RESET_DAYS:
+                      print(f"  🔄 {username} - RESET!")
+                      user_data['hwid'] = ''
+                      user_data['hwidresetdate'] = today_str
+                      user_data['lastresetdate'] = today_str
+                      user_data['hwidsetdate'] = today_str
+                      changes_made = True
+                  else:
+                      print(f"  ✅ {username} - {RESET_DAYS - days_diff} days left")
+              print('')
+
+          if changes_made:
+              print('💾 Saving...')
+              with open(FILE_PATH, 'w') as f:
+                  json.dump(users, f, indent=2)
+              print('✅ Saved!')
+
+        shell: python3 {0}
+
+      - name: Commit and push
         run: |
-          # Check if there are changes to commit
           if [[ -n "$(git status --porcelain)" ]]; then
-            echo "📝 Changes detected, committing..."
             git config user.name "GitHub Actions Bot"
             git config user.email "actions@github.com"
             git add users.json
-            git commit -m "🔄 Auto-reset HWID (30 days rule) - $(date +'%Y-%m-%d')"
+            git commit -m "🔄 Auto-reset HWID $(date +'%Y-%m-%d')"
             git push
-            echo "✅ Changes pushed successfully!"
+            echo "✅ Pushed!"
           else
-            echo "✅ No changes to commit."
+            echo "✅ No changes"
           fi
