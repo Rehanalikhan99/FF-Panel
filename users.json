@@ -1,87 +1,87 @@
 {
-  "EREN": {
-    "Aladin": {
-      "password": "1",
-      "hwid": "66fb987f7c8de6461df1e269083e41e6e73c3aef89aa174181195a29252d4c97",
-      "expiryDate": "2027-12-31",
-      "isFreeUser": false,
-      "hwid_bind_date": "2026-08-05",
-      "hwid_reset_date": "2026-09-04",
-      "last_reset_date": "2026-08-04"
+    "EREN": {
+        "Aladin": {
+            "password": "1",
+            "hwid": "66fb987f7c8de6461df1e269083e41e6e73c3aef89aa174181195a29252d4c97",
+            "expiryDate": "2027-12-31",
+            "isFreeUser": false,
+            "hwid_bind_date": "2026-08-05",
+            "hwid_reset_date": "2026-09-04",
+            "last_reset_date": "2026-08-04"
+        },
+        "eren_new_bind": {
+            "password": "123456",
+            "hwid": "",
+            "expiryDate": "2027-12-31",
+            "isFreeUser": false,
+            "hwid_bind_date": "",
+            "hwid_reset_date": "",
+            "last_reset_date": "2026-09-03"
+        },
+        "eren_expired": {
+            "password": "123456",
+            "hwid": "EREN-HWID-333",
+            "expiryDate": "2026-07-20",
+            "isFreeUser": false,
+            "hwid_bind_date": "2026-06-15",
+            "hwid_reset_date": "2026-07-15",
+            "last_reset_date": ""
+        },
+        "eren_free": {
+            "password": "123456",
+            "hwid": "EREN-HWID-444",
+            "expiryDate": "",
+            "isFreeUser": true,
+            "hwid_bind_date": "2026-07-01",
+            "hwid_reset_date": "2026-08-01",
+            "last_reset_date": ""
+        }
     },
-    "eren_new_bind": {
-      "password": "123456",
-      "hwid": "EREN-HWID-222",
-      "expiryDate": "2027-12-31",
-      "isFreeUser": false,
-      "hwid_bind_date": "2026-08-04",
-      "hwid_reset_date": "2026-09-03",
-      "last_reset_date": ""
-    },
-    "eren_expired": {
-      "password": "123456",
-      "hwid": "EREN-HWID-333",
-      "expiryDate": "2026-07-20",
-      "isFreeUser": false,
-      "hwid_bind_date": "2026-06-15",
-      "hwid_reset_date": "2026-07-15",
-      "last_reset_date": ""
-    },
-    "eren_free": {
-      "password": "123456",
-      "hwid": "EREN-HWID-444",
-      "expiryDate": "",
-      "isFreeUser": true,
-      "hwid_bind_date": "2026-07-01",
-      "hwid_reset_date": "2026-08-01",
-      "last_reset_date": ""
+    "INSANE": {
+        "Rehan": {
+            "password": "1",
+            "hwid": "",
+            "expiryDate": "2027-12-31",
+            "isFreeUser": false,
+            "hwid_bind_date": "",
+            "hwid_reset_date": "",
+            "last_reset_date": "2026-08-04"
+        },
+        "insane_new_bind": {
+            "password": "654321",
+            "hwid": "",
+            "expiryDate": "2027-12-31",
+            "isFreeUser": false,
+            "hwid_bind_date": "",
+            "hwid_reset_date": "",
+            "last_reset_date": "2026-09-03"
+        },
+        "insane_active": {
+            "password": "654321",
+            "hwid": "",
+            "expiryDate": "2027-12-31",
+            "isFreeUser": false,
+            "hwid_bind_date": "",
+            "hwid_reset_date": "",
+            "last_reset_date": "2026-08-31"
+        },
+        "insane_expired": {
+            "password": "654321",
+            "hwid": "INSANE-HWID-444",
+            "expiryDate": "2026-07-15",
+            "isFreeUser": false,
+            "hwid_bind_date": "2026-06-01",
+            "hwid_reset_date": "2026-07-01",
+            "last_reset_date": ""
+        },
+        "insane_free": {
+            "password": "654321",
+            "hwid": "INSANE-HWID-555",
+            "expiryDate": "",
+            "isFreeUser": true,
+            "hwid_bind_date": "2026-07-01",
+            "hwid_reset_date": "2026-08-01",
+            "last_reset_date": ""
+        }
     }
-  },
-  "INSANE": {
-    "Rehan": {
-      "password": "1",
-      "hwid": "",
-      "expiryDate": "2027-12-31",
-      "isFreeUser": false,
-      "hwid_bind_date": "",
-      "hwid_reset_date": "",
-      "last_reset_date": "2026-08-04"
-    },
-    "insane_new_bind": {
-      "password": "654321",
-      "hwid": "INSANE-HWID-222",
-      "expiryDate": "2027-12-31",
-      "isFreeUser": false,
-      "hwid_bind_date": "2026-08-04",
-      "hwid_reset_date": "2026-09-03",
-      "last_reset_date": ""
-    },
-    "insane_active": {
-      "password": "654321",
-      "hwid": "",
-      "expiryDate": "2027-12-31",
-      "isFreeUser": false,
-      "hwid_bind_date": "",
-      "hwid_reset_date": "",
-      "last_reset_date": "2026-08-31"
-    },
-    "insane_expired": {
-      "password": "654321",
-      "hwid": "INSANE-HWID-444",
-      "expiryDate": "2026-07-15",
-      "isFreeUser": false,
-      "hwid_bind_date": "2026-06-01",
-      "hwid_reset_date": "2026-07-01",
-      "last_reset_date": ""
-    },
-    "insane_free": {
-      "password": "654321",
-      "hwid": "INSANE-HWID-555",
-      "expiryDate": "",
-      "isFreeUser": true,
-      "hwid_bind_date": "2026-07-01",
-      "hwid_reset_date": "2026-08-01",
-      "last_reset_date": ""
-    }
-  }
 }
