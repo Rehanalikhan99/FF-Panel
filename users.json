@@ -2,12 +2,12 @@
     "EREN": {
         "Aladin": {
             "password": "1",
-            "hwid": "66fb987f7c8de6461df1e269083e41e6e73c3aef89aa174181195a29252d4c97",
+            "hwid": "",
             "expiryDate": "2027-12-31",
             "isFreeUser": false,
-            "hwid_bind_date": "2026-08-05",
-            "hwid_reset_date": "2026-09-04",
-            "last_reset_date": "2026-08-04"
+            "hwid_bind_date": "",
+            "hwid_reset_date": "",
+            "last_reset_date": "2026-09-04"
         },
         "eren_new_bind": {
             "password": "123456",
